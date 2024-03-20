@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+    links:
+      - catalog-service
+      - order-service
+
+  catalog-service:
+    build: ./catalog
+    ports:
+      - "3001:3001"
+    networks:
+      - my-network
+
+  order-service:
+    build: ./order
+    ports:
+      - "3002:3002"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
